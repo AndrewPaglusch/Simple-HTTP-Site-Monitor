@@ -1,0 +1,42 @@
+#A basic check
+#Follow a maximum of 5 HTTP redirects
+#Don't ignore any SSL errors we may get
+#Search page for "some text"
+website1.com:
+    url: http://website1.com
+    ignore_ssl_errors: false
+    max_redirect: 5
+    timeout: 5
+    search: some text
+    http_headers:
+      user-agent: HTTP Site Monitor
+
+#Add some custom headers to your check
+#Useful for adding a custom "user-agent"
+website2.com:
+    url: http://website2.com
+    ignore_ssl_errors: false
+    max_redirect: 5
+    timeout: 5
+    search: some text
+    http_headers:
+      user-agent: HTTP Site Monitor
+
+#A check without relying on DNS
+#Add a "host" header so that the server knows to
+#send us content for "website3.com"
+#If we get a redirect to a different scheme of "website3.com"
+#like "http://" -> "https://website3.com", it will automatically be replaced with
+#the IP address in the "url" field and the "website3.com" host header will
+#be placed in the new request for the redirect locaton automatically. This is to completely
+#avoid any dependency on DNS and still allow us to follow redirects
+#to the same hostname
+website3.com_nodns:
+    url: http://12.34.56.78
+    ignore_ssl_errors: true
+    max_redirect: 5
+    timeout: 5
+    search: some text
+    http_headers:
+      host: website3.com
+      user-agent: HTTP Site Monitor

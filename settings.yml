@@ -1,0 +1,6 @@
+telegram_botkey: <your telegram bot key here>
+telegram_chatid: <your telegram notification group id here>
+looptimer: 60
+history_len: 10
+change_threshold: 3
+flap_threshold: 4
