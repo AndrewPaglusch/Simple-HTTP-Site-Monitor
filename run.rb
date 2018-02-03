@@ -1,10 +1,5 @@
 #!/usr/bin/env ruby
 
-# Copyright (C) 2018 BoPag Computer Services, LLC - All Rights Reserved
-# Unauthorized copying of this file, via any medium is strictly prohibited
-# Proprietary and confidential
-# Written by Andrew Paglusch <andrew@bopag.com>
-
 require "net/http"
 require 'openssl'
 require "uri"
