@@ -1,0 +1,9 @@
+Youtube:
+    url: http://youtube.com
+    ignore_ssl_errors: true
+    max_redirect: 5
+    timeout: 5
+    search: www.google.com 
+    http_headers:
+      host:
+      user-agent: HTTP Site Monitor

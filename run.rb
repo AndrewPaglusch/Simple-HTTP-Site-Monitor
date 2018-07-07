@@ -193,26 +193,29 @@ def print_message(type, message, send_telegram = false)
   end
 end
 
-def read_sites(file)
-  print_message("info", "Loading sites from '#{file}'...")
+def read_sites(sites_dir)
+  print_message("info", "Loading sites '#{sites_dir}/*.yml'...")
 
+  site_files = Dir.glob("#{sites_dir}/*.yml")
   sites = Hash.new
 
   begin
-    YAML.load_file(file).each do |site_name,settings|
-      url = settings["url"]
-      search = settings["search"]
+    site_files.each do |f|
+      YAML.load_file(f).each do |site_name,settings|
+        url = settings["url"]
+        search = settings["search"]
 
-      #Correct URL if needed
-      if ! url.include? "http"
-        print_message("warn", "Site '#{url}' is missing 'http/https' prefix. Defaulting to 'http://' for this site")
-        url = "http://#{url}"
+        #Correct URL if needed
+        if ! url.include? "http"
+          print_message("warn", "Site '#{url}' is missing 'http/https' prefix. Defaulting to 'http://' for this site")
+          url = "http://#{url}"
+        end
+ 
+        #Add site_name => {option => value, ...}
+        sites[site_name] = settings
+ 
+        print_message("info", "Loaded site '#{site_name}'")
       end
-
-      #Add site_name => {option => value, ...}
-      sites[site_name] = settings
-
-      print_message("info", "Loaded site '#{site_name}'")
     end
 
     print_message("info", "Finished loading all sites")
@@ -247,7 +250,7 @@ STDOUT.sync = true
 read_settings("settings.yml")
 
 #Load sites.yml
-sites = read_sites("sites.yml")
+sites = read_sites("sites.d")
 
 #Add 'history' array for each site
 #{ url => [0,0,0,0,0] }

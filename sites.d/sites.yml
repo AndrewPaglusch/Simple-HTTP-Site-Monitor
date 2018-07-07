@@ -2,23 +2,23 @@
 #Follow a maximum of 5 HTTP redirects
 #Don't ignore any SSL errors we may get
 #Search page for "some text"
-website1.com:
-    url: http://website1.com
+Bing:
+    url: https://bing.com
     ignore_ssl_errors: false
     max_redirect: 5
     timeout: 5
-    search: some text
+    search: <title>Bing</title>
     http_headers:
       user-agent: HTTP Site Monitor
 
 #Add some custom headers to your check
 #Useful for adding a custom "user-agent"
-website2.com:
-    url: http://website2.com
+msn.com:
+    url: http://msn.com
     ignore_ssl_errors: false
     max_redirect: 5
     timeout: 5
-    search: some text
+    search: Microsoft
     http_headers:
       user-agent: HTTP Site Monitor
 
@@ -31,12 +31,12 @@ website2.com:
 #be placed in the new request for the redirect locaton automatically. This is to completely
 #avoid any dependency on DNS and still allow us to follow redirects
 #to the same hostname
-website3.com_nodns:
-    url: http://12.34.56.78
+Afraid.org (No DNS):
+    url: http://204.140.20.21
     ignore_ssl_errors: true
     max_redirect: 5
     timeout: 5
-    search: some text
+    search: queries per second
     http_headers:
-      host: website3.com
+      host: afraid.org
       user-agent: HTTP Site Monitor
