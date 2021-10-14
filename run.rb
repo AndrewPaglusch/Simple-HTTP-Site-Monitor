@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+#!/usr/bin/scl enable rh-ruby26 -- ruby
 
 require "net/http"
 require 'openssl'
@@ -115,6 +115,9 @@ def should_alert(history, current_status)
   #Defines number of consecutive 1's or 0's until a site is condidered up or down
   change_thresh = @settings['change_threshold']
 
+  # Defines if we should detect flapping sites or not
+  detect_flaps = @settings['detect_flaps'].to_s.downcase == 'true'
+
   #Define number of state changes until a site is considered down-flapping
   flap_thresh = @settings['flap_threshold']
 
@@ -132,7 +135,7 @@ def should_alert(history, current_status)
   state_changes = get_state_changes(history)
 
   #Check for flapping
-  if state_changes >= flap_thresh #Site flapping/down?
+  if state_changes >= flap_thresh and detect_flaps #Site flapping/down?
     if current_status == "flap"
       return false, "still_flapping", current_status #Site is still flapping/down. Consider it down don't alert
     else

@@ -3,4 +3,5 @@ telegram_chatid: <your telegram notification group id here>
 looptimer: 60
 history_len: 10
 change_threshold: 3
+detect_flaps: true
 flap_threshold: 4
